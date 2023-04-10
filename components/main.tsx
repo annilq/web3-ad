@@ -142,124 +142,79 @@ const madeForYouAlbums: Album[] = [
 export function AppleMusicDemo() {
     return (
         <div className="overflow-hidden rounded-md border border-slate-200 bg-gradient-to-b from-rose-500 to-indigo-700 shadow-2xl dark:border-slate-800">
-            <div className="p-8">
-                <div className="rounded-md bg-white shadow-2xl transition-all dark:bg-slate-900">
-                    <div className="grid grid-cols-4 xl:grid-cols-5">
-                        <aside className="pb-12">
-                            <div className="px-8 py-6">
-                                <p className="flex items-center text-2xl font-semibold tracking-tight">
-                                    <Music className="mr-2" />
-                                    Music
+            <div className="rounded-md bg-white shadow-2xl transition-all dark:bg-slate-900">
+                <div className="col-span-4 border-l border-l-slate-200 dark:border-l-slate-700 xl:col-span-4">
+                    <div className="h-full px-8 py-6">
+                        <div className="flex items-center justify-between">
+                            <div className="space-y-1">
+                                <h2 className="text-2xl font-semibold tracking-tight">
+                                    Listen Now
+                                </h2>
+                                <p className="text-sm text-slate-500 dark:text-slate-400">
+                                    Top picks for you. Updated daily.
                                 </p>
                             </div>
-                            <div className="space-y-4">
-                                <div className="px-6 py-2">
-                                    <h2 className="mb-2 px-2 text-lg font-semibold tracking-tight">
-                                        Discover
-                                    </h2>
-                                    <div className="space-y-1">
-                                        <Button
-                                            variant="subtle"
-                                            size="sm"
-                                            className="w-full justify-start"
-                                        >
-                                            <PlayCircle className="mr-2 h-4 w-4" />
-                                            Listen Now
-                                        </Button>
-                                        <Button
-                                            variant="ghost"
-                                            size="sm"
-                                            className="w-full justify-start"
-                                        >
-                                            <LayoutGrid className="mr-2 h-4 w-4" />
-                                            Browse
-                                        </Button>
-                                        <Button
-                                            variant="ghost"
-                                            size="sm"
-                                            className="w-full justify-start"
-                                        >
-                                            <Radio className="mr-2 h-4 w-4" />
-                                            Radio
-                                        </Button>
-                                    </div>
-                                </div>
-                            </div>
-                        </aside>
-                        <div className="col-span-3 border-l border-l-slate-200 dark:border-l-slate-700 xl:col-span-4">
-                            <div className="h-full px-8 py-6">
-                                <div className="flex items-center justify-between">
-                                    <div className="space-y-1">
-                                        <h2 className="text-2xl font-semibold tracking-tight">
-                                            Listen Now
-                                        </h2>
-                                        <p className="text-sm text-slate-500 dark:text-slate-400">
-                                            Top picks for you. Updated daily.
-                                        </p>
-                                    </div>
-                                </div>
-                                <Separator className="my-4" />
-                                <div className="relative">
-                                    <div className="relative flex space-x-4">
-                                        {listenNowAlbums.map((album) => (
-                                            <AlbumArtwork
-                                                key={album.name}
-                                                album={album}
-                                                className="w-[250px]"
-                                            />
-                                        ))}
-                                    </div>
-                                </div>
-                                <div className="mt-6 space-y-1">
-                                    <h2 className="text-2xl font-semibold tracking-tight">
-                                        Made for You
-                                    </h2>
-                                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                                        Your personal playlists. Updated daily.
-                                    </p>
-                                </div>
-                                <Separator className="my-4" />
-                                <div className="relative">
-                                    <ScrollArea>
-                                        <div className="flex space-x-4 pb-4">
-                                            {madeForYouAlbums.map((album) => (
-                                                <AlbumArtwork
-                                                    key={album.name}
-                                                    album={album}
-                                                    className="w-[150px]"
-                                                    aspectRatio={1 / 1}
-                                                />
-                                            ))}
-                                        </div>
-                                        <ScrollBar orientation="horizontal" />
-                                    </ScrollArea>
-                                </div>
+                        </div>
+                        <Separator className="my-4" />
+                        <div className="relative">
+                            <div className="relative flex space-x-4">
+                                {listenNowAlbums.map((album) => (
+                                    <AlbumArtwork
+                                        key={album.name}
+                                        album={album}
+                                        className="w-[250px]"
+                                    />
+                                ))}
                             </div>
                         </div>
-                        <Dialog>
-                            <DialogContent>
-                                <DialogHeader>
-                                    <DialogTitle>Add Podcast</DialogTitle>
-                                    <DialogDescription>
-                                        Copy and paste the podcast feed URL to import.
-                                    </DialogDescription>
-                                </DialogHeader>
-                                <div className="grid gap-4 py-4">
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="url">Podcast URL</Label>
-                                        <Input
-                                            id="url"
-                                            placeholder="https://example.com/feed.xml"
+                        <div className="mt-6 space-y-1">
+                            <h2 className="text-2xl font-semibold tracking-tight">
+                                Made for You
+                            </h2>
+                            <p className="text-sm text-slate-500 dark:text-slate-400">
+                                Your personal playlists. Updated daily.
+                            </p>
+                        </div>
+                        <Separator className="my-4" />
+                        <div className="relative">
+                            <ScrollArea>
+                                <div className="flex space-x-4 pb-4">
+                                    {madeForYouAlbums.map((album) => (
+                                        <AlbumArtwork
+                                            key={album.name}
+                                            album={album}
+                                            className="w-[150px]"
+                                            aspectRatio={1 / 1}
                                         />
-                                    </div>
+                                    ))}
                                 </div>
-                                <DialogFooter>
-                                    <Button>Import Podcast</Button>
-                                </DialogFooter>
-                            </DialogContent>
-                        </Dialog>
+                                <ScrollBar orientation="horizontal" />
+                            </ScrollArea>
+                        </div>
                     </div>
                 </div>
+                <Dialog>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Add Podcast</DialogTitle>
+                            <DialogDescription>
+                                Copy and paste the podcast feed URL to import.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                            <div className="grid gap-2">
+                                <Label htmlFor="url">Podcast URL</Label>
+                                <Input
+                                    id="url"
+                                    placeholder="https://example.com/feed.xml"
+                                />
+                            </div>
+                        </div>
+                        <DialogFooter>
+                            <Button>Import Podcast</Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             </div>
         </div>
     )

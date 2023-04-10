@@ -1,11 +1,6 @@
 import * as React from "react"
 import {
-
     LogOut,
-    Mail,
-    MessageSquare,
-    PlusCircle,
-    UserPlus,
     Users,
 } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -25,15 +20,34 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+    Dialog,
+    DialogTrigger,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
+import { useAccount, useConnect, useEnsName, useDisconnect } from 'wagmi'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 
 export default function Profile() {
+    const { address, isConnected, chains } = useAccount()
+    const { data: ensName } = useEnsName({ address })
+    const { connect } = useConnect({
+        connector: new InjectedConnector(),
+    })
+    const { disconnect } = useDisconnect({
+        onError(error) {
+            console.log('Error', error)
+        }
+    })
+    if (!isConnected) return <Button onClick={() => connect()}>Connect Wallet</Button>
     return (
         <>
-            <div className="ml-auto mr-4">
-                <h3 className="text-sm font-semibold">Welcome back</h3>
-            </div>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+            <Dialog>
+                <DialogTrigger asChild>
                     <Button
                         variant="ghost"
                         className="relative h-10 w-10 rounded-full"
@@ -46,51 +60,18 @@ export default function Profile() {
                             <AvatarFallback>SC</AvatarFallback>
                         </Avatar>
                     </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                    className="w-56"
-                    align="end"
-                    forceMount
-                >
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuGroup>
-                        <DropdownMenuItem>
-                            <Users className="mr-2 h-4 w-4" />
-                            <span>Team</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuSub>
-                            <DropdownMenuSubTrigger>
-                                <UserPlus className="mr-2 h-4 w-4" />
-                                <span>Invite users</span>
-                            </DropdownMenuSubTrigger>
-                            <DropdownMenuPortal>
-                                <DropdownMenuSubContent forceMount>
-                                    <DropdownMenuItem>
-                                        <Mail className="mr-2 h-4 w-4" />
-                                        <span>Email</span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem>
-                                        <MessageSquare className="mr-2 h-4 w-4" />
-                                        <span>Message</span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuItem>
-                                        <PlusCircle className="mr-2 h-4 w-4" />
-                                        <span>More...</span>
-                                    </DropdownMenuItem>
-                                </DropdownMenuSubContent>
-                            </DropdownMenuPortal>
-                        </DropdownMenuSub>
-                    </DropdownMenuGroup>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>
-                        <LogOut className="mr-2 h-4 w-4" />
-                        <span>Log out</span>
-                        <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
+                </DialogTrigger>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Address</DialogTitle>
+                        <DialogDescription>
+                            <span>{ensName ?? address}</span>                            </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button onClick={() => disconnect()}>disconnect</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </>
     )
 }
