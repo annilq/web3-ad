@@ -33,7 +33,7 @@ import { useAccount, useConnect, useEnsName, useDisconnect } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 
 export default function Profile() {
-    const { address, isConnected, chains } = useAccount()
+    const { address, isConnected } = useAccount()
     const { data: ensName } = useEnsName({ address })
     const { connect } = useConnect({
         connector: new InjectedConnector(),
