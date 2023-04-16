@@ -26,8 +26,8 @@ export function AppleMusicDemo(props) {
             <div className="bg-white shadow-2xl transition-all dark:bg-slate-900">
                 <div className="col-span-4 border-l border-l-slate-200 dark:border-l-slate-700 xl:col-span-4">
                     <div className="h-full px-8 py-6">
-                        <div>
-                            <div className="flex items-center justify-between flex-wrap">
+                        {/* <div>
+                            <div className="flex flex-wrap items-center justify-between">
                                 <div className="space-y-1">
                                     <h2 className="text-2xl font-semibold tracking-tight">
                                         Main banner
@@ -67,7 +67,7 @@ export function AppleMusicDemo(props) {
                                     album={album}
                                 />
                             ))}
-                        </div>
+                        </div> */}
                         <div className="mt-6 flex items-center justify-between">
                             <div className="space-y-1">
                                 <h2 className="text-2xl font-semibold tracking-tight">
@@ -79,7 +79,23 @@ export function AppleMusicDemo(props) {
                             </div>
                         </div>
                         <Separator className="my-4" />
-                        <div className="relative grid grid-cols-5 space-x-4">
+                        <div className="relative grid grid-cols-5 gap-4">
+                            {list1.map((album) => (
+                                <AdCard
+                                    key={album.name}
+                                    album={album}
+                                />
+                            ))}
+                        </div>
+                        <div className="relative mt-4 grid grid-cols-5 gap-4">
+                            {list1.map((album) => (
+                                <AdCard
+                                    key={album.name}
+                                    album={album}
+                                />
+                            ))}
+                        </div>
+                        <div className="relative mt-4 grid grid-cols-5 gap-4">
                             {list1.map((album) => (
                                 <AdCard
                                     key={album.name}
@@ -98,7 +114,7 @@ export function AppleMusicDemo(props) {
                         <Separator className="my-4" />
                         <div className="relative">
                             <ScrollArea>
-                                <div className="grid grid-cols-7 space-x-4 pb-4">
+                                <div className="grid grid-cols-7 gap-4 pb-4">
                                     {list2.map((album) => (
                                         <AdCard
                                             key={album.name}
